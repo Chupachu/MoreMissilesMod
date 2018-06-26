@@ -1,0 +1,103 @@
+ID = chupachu.more_missiles_mod
+Name = "More Missiles"
+Version = 0.14.1
+CompatibleGameVersions = ["0.14.1"]
+Author = "Chupachu"
+Logo = "logo.png"
+StringsFolder = "Strings"
+
+Description = "This mod adds EMP Missiles, Incendiary Missiles, Black Hole Missiles, Holo Missiles, and Stealth Missiles to the game, each with their own abilities and traits.\n\nThis mod has not been balanced extensively, so let me know if any items are too cheap/expensive/overpowered.\n\nFeatures changed: Added Holo Missiles"
+
+Actions
+[
+	{
+		Action = Add
+		AddTo = "<gui/game/designer/editor_groups.txt>"
+		Name = "MoreMissiles"
+		ToAdd
+		{
+			NameKey = "EditorGroups/MoreMissiles"
+			Icon
+			{
+				Texture = "Gui/MoreMissiles.png"
+			}
+		}
+	}
+	{
+		Action = Add
+		AddTo = "<gui/game/designer/editor_groups.txt>"
+		Name = "Converters"
+		ToAdd
+		{
+			NameKey = "EditorGroups/Converters"
+			Icon
+			{
+				Texture = "Gui/Converters.png"
+			}
+		}
+	}
+	{
+		Action = AddMany
+		AddTo = "<Ships/Terran/terran.txt>/Terran/Parts"
+
+		// These are the data fields we want to add to the [] list.
+		ManyToAdd
+		[
+
+			&<StealthMissile_Factory/missile_factory.txt>/Part
+			&<StealthMissile_Storage/missile_storage.txt>/Part
+			&<StealthMissile_Launcher/missile_launcher.txt>/Part
+			
+			&<missile_factory_d_to_s/missile_factory.txt>/Part
+			&<missile_factory_s_to_d/missile_factory.txt>/Part
+			
+			&<FireMissile_Factory/missile_factory.txt>/Part
+			&<FireMissile_Storage/missile_storage.txt>/Part
+			&<FireMissile_Launcher/missile_launcher.txt>/Part
+			
+			&<missile_factory_d_to_i/missile_factory.txt>/Part
+			&<missile_factory_i_to_d/missile_factory.txt>/Part
+			
+			&<EMPMissile_Factory/missile_factory.txt>/Part
+			&<EMPMissile_Storage/missile_storage.txt>/Part
+			&<EMPMissile_Launcher/missile_launcher.txt>/Part
+			&<missile_factory_d_to_e/missile_factory.txt>/Part
+			&<missile_factory_e_to_d/missile_factory.txt>/Part
+			
+			
+			&<BlackHoleMissile_Factory/missile_factory.txt>/Part
+			&<BlackHoleMissile_Storage/missile_storage.txt>/Part
+			&<BlackHoleMissile_Launcher/missile_launcher.txt>/Part
+			
+			&<holomissile_reactor/reactor.txt>/Part
+			&<HoloMissile_Launcher/missile_launcher.txt>/Part
+
+		]
+	}
+	//{
+		//Action = AddMany
+		//AddTo = "/common_effects"
+
+		// These are the data fields we want to add to the [] list.
+		//ManyToAdd
+		//{
+			//BlackHoleExplode = &<Particles/Explosions/reactor_explode.txt>
+			//BlackHoleExplodeFlash = &<Particles/Explosions/reactor_explode_flash.txt>
+			//BlackHoleShockwave = &<Particles/Explosions/reactor_shockwave.txt>
+			//HoloMissileShockwave = &<Particles/Explosions/holomissile_shockwave.txt>
+		//}
+	//}
+	{
+		Action = AddMany
+		AddTo = "/Ammo"
+		
+		ManyToAdd
+		[
+			&<Stealthmissile/Stealthmissile.txt>/Ammo
+			&<Firemissile/Firemissile.txt>/Ammo
+			&<EMPmissile/EMPmissile.txt>/Ammo
+			&<BlackHolemissile/BlackHoleMissile.txt>/Ammo
+			&<Holomissile/HoloMissile.txt>/Ammo
+		]
+	}
+]

@@ -1,0 +1,12 @@
+Ammo
+	{
+		ID = blackholemissile_part
+		MaxCarried = 1
+		MaxCarriedSprites = 1
+		CarriedSprite
+		{
+			File = "blackholemissile_part.png"
+			Size = [1, 1]
+		}
+		CarriedSpriteOffset = [0, .25]
+	}

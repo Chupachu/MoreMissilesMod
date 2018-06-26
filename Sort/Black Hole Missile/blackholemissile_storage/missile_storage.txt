@@ -1,0 +1,251 @@
+Part : /BASE_PART
+{
+	NameKey = "Parts/BlackHoleMissileStorage"
+	IconNameKey = "Parts/BlackHoleMissileStorageIcon"
+	IDString = blackholemissilestorage
+	EditorGroup = "Munitions"
+	DescriptionKey = "Parts/BlackHoleMissileStorageDesc"
+	Cost = 150000
+	AIValue = 15
+	Size = [3, 2]
+	MaxHealth = 6000
+	PenetrationResistance = 1
+	TypeCategories = [missiles]
+	FlipHRotate = [2, 1, 0, 3]
+	FlipVRotate = [0, 3, 2, 1]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [64, 42.66]
+	}
+	BlueprintSprites
+	[
+		{
+			File = "blueprints.png"
+			Size = [3, 2]
+		}
+	]
+	Components
+	{
+		blackholemissilestorage
+		{
+			Type = AmmoConsumer
+			AmmoType = blackholemissile_part
+			MaxAmmo = 12
+			StartingAmmo = 0
+			SuppliesAmmo = true
+			LowConsumeJobPriority = &/TERRAN_PRIORITIES/MissileStorage_LowConsume
+			HighConsumeJobPriority = &/TERRAN_PRIORITIES/MissileStorage_HighConsume
+			EmptyConsumeJobPriority = &/TERRAN_PRIORITIES/MissileStorage_EmptyConsume
+			JobUnassignThreshold = 1000000// Effectively unassignable.
+			RequiredForWholePartOperation = true
+
+			ReceiveAmmoMediaEffects = &/EFFECT_PREFABS/MissileLoad
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [1.5, 1]
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [3, 2]
+					}
+					{
+						File = "floor_33.png"
+						Size = [3, 2]
+					}
+					{
+						File = "floor_66.png"
+						Size = [3, 2]
+					}
+				]
+			}
+			OperationalLighting
+			{
+				Layer = "lights_add"
+				DamageLevels
+				[
+					{
+						File = "lights.png"
+						Size = [3, 2]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [3, 2]
+					}
+					{
+						File = "walls_33.png"
+						Size = [3, 2]
+					}
+					{
+						File = "walls_66.png"
+						Size = [3, 2]
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						Size = [3, 2]
+					}
+					{
+						File = "roof_33.png"
+						Size = [3, 2]
+					}
+					{
+						File = "roof_66.png"
+						Size = [3, 2]
+					}
+				]
+			}
+			OperationalRoofWindows
+			{
+				Layer = "roof_windows"
+				DamageLevels
+				[
+					{
+						File = "roof_windows.png"
+						Size = [3, 2]
+					}
+					{
+						File = "roof_windows_33.png"
+						Size = [3, 2]
+					}
+					{
+						File = "roof_windows_66.png"
+						Size = [3, 2]
+					}
+				]
+			}
+			NonOperationalRoofWindows = &OperationalRoofWindows
+		}
+
+		MissileSprites
+		{
+			Type = AmmoSprites
+			Location = [1.5, 1]
+			AmmoStorage = blackholemissilestorage
+			Layer = "doodads_low"
+			AmmoLevels
+			[
+				{
+					File = "missiles1.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles2.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles3.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles4.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles5.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles6.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles7.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles8.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles9.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles10.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles11.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missiles12.png"
+					Size = [3, 2]
+				}
+			]
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/EFFECT_PREFABS/BigPartDestroyed
+			Location = [1.5, 1]
+
+			FactorHitEffectsWith = blackholemissilestorage
+			HitEffects
+			[
+				{
+					Type = PartAreaDamage
+					DamageVsOperationalPerTile = 3000
+					RadiusVsOperational = 6
+					DamageVsStructurePerTile = 1500
+					RadiusVsStructure = 4.5
+					Delay = .05
+					AllowFriendlyDamage = true
+				}
+				{
+					Type = AreaFires
+					FireChancePerTile = .3
+					FireRadius = 6
+					FireFalloff = 0
+					Delay = .05
+					AllowFriendlyFires = true
+				}
+			]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [1.5, 1]
+			Layer = "indicators"
+			Indicators
+			[
+				// Out of missiles.
+				{
+					Source = blackholemissilestorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoMissiles
+						Size = [1.5, 1.5]
+					}
+				}
+			]
+		}
+	}
+}

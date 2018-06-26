@@ -1,0 +1,12 @@
+Ammo
+	{
+		ID = empmissile_part
+		MaxCarried = 1
+		MaxCarriedSprites = 1
+		CarriedSprite
+		{
+			File = "empmissile_part.png"
+			Size = [1, 1]
+		}
+		CarriedSpriteOffset = [0, .25]
+	}

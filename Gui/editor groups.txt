@@ -1,0 +1,71 @@
+Weapons
+{
+	NameKey = "EditorGroups/Weapons"
+	Icon
+	{
+		Texture = "group_weapons.png"
+	}
+}
+
+Munitions
+{
+	NameKey = "EditorGroups/Munitions"
+	Icon
+	{
+		Texture = "group_munitions.png"
+	}
+}
+
+Defenses
+{
+	NameKey = "EditorGroups/Defenses"
+	Icon
+	{
+		Texture = "group_defenses.png"
+	}
+}
+
+Flight
+{
+	NameKey = "EditorGroups/Flight"
+	Icon
+	{
+		Texture = "group_flight.png"
+	}
+}
+
+Crew
+{
+	NameKey = "EditorGroups/Crew"
+	Icon
+	{
+		Texture = "group_crew.png"
+	}
+}
+
+Power
+{
+	NameKey = "EditorGroups/Power"
+	Icon
+	{
+		Texture = "group_power.png"
+	}
+}
+
+Misc
+{
+	NameKey = "EditorGroups/Misc"
+	Icon
+	{
+		Texture = "group_misc.png"
+	}
+}
+Converters
+{
+	NameKey = "EditorGroups/Converters"
+	Icon
+	{
+		Texture = "Converters.png"
+	}
+}
+

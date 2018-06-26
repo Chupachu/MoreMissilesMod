@@ -1,0 +1,383 @@
+Part : /BASE_PART
+{
+	NameKey = "Parts/FireMissileFactory"
+	IconNameKey = "Parts/FireMissileFactoryIcon"
+	IDString = firemissilefactory
+	EditorGroup = "Munitions"
+	DescriptionKey = "Parts/FireMissileFactoryDesc"
+	Cost = 20000
+	AIValue = 30
+	Size = [3, 3]
+	SelectionPriority = 1
+	MaxHealth = 9000
+	PenetrationResistance = 1
+	TypeCategories = [missiles]
+	AllowedDoorLocations
+	[
+		[-1, 1]
+		[-1, 2]
+		[0, 3]
+		[1, 3]
+		[2, 3]
+		[3, 1]
+		[3, 2]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [64, 64]
+	}
+	BlueprintSprites
+	[
+		{
+			File = "blueprints.png"
+			Size = [3, 3]
+		}
+	]
+	PowerUIStats
+	{
+		Min = .04
+		Ideal = .8
+	}
+	CrewUIStats
+	{
+		Min = .25
+		Ideal = .5
+	}
+	Components
+	{
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			DefaultToggleValue = 1
+			RequiredForWholePartOperation = true
+			ToggledOnChoices = [1]
+		}
+
+		firemissilestorage
+		{
+			Type = AmmoStorage
+			AmmoType = firemissile_part
+			MaxAmmo = 12
+			SuppliesAmmo = true
+			AssumeAlwaysHasAmmo = true
+		}
+
+		BatteryStorage
+		{
+			Type = AmmoConsumer
+			AmmoType = battery
+			MaxAmmo = 2000
+			LowConsumeJobPriority = &/TERRAN_PRIORITIES/AmmoFactory_LowConsume
+			HighConsumeJobPriority = &/TERRAN_PRIORITIES/AmmoFactory_HighConsume
+			EmptyConsumeJobPriority = &/TERRAN_PRIORITIES/AmmoFactory_EmptyConsume
+			JobUnassignThreshold = 1000000// Effectively unassignable.
+			ResupplyThreshold = 500
+			RequiredForWholePartOperation = true
+			AmmoDesireToggle = PowerToggle
+
+			ReceiveAmmoMediaEffects = &/EFFECT_PREFABS/PowerDeliver
+		}
+
+		AmmoConverter
+		{
+			Type = AmmoConverter
+			Location = [1, 1]
+			FromStorage = BatteryStorage
+			ToStorage = firemissilestorage
+			FromQuantity = 40
+			ToQuantity = 1
+			Interval = .85
+
+			ConvertAmmoMediaEffects
+			[
+				: /SOUNDS/AudioInterior
+				{
+					Sound = "../bullet_create.wav"
+					Volume = .1
+					Speed = .5
+					SpeedVariation = .05
+				}
+			]
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [1.5, 1.5]
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [3, 3]
+					}
+					{
+						File = "floor_33.png"
+						Size = [3, 3]
+					}
+					{
+						File = "floor_66.png"
+						Size = [3, 3]
+					}
+				]
+			}
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				Offset = [0, -.5]
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"doodads_on1.png"
+							"doodads_on2.png"
+							"doodads_on3.png"
+							"doodads_on4.png"
+							"doodads_on5.png"
+							"doodads_on6.png"
+							"doodads_on7.png"
+							"doodads_on8.png"
+						]
+						Size = [3, 2]
+						AnimationInterval = 0.1
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "doodads_high"
+				Offset = [0, -.5]
+				DamageLevels
+				[
+					{
+						File = "doodads_off.png"
+						Size = [3, 2]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [3, 3]
+					}
+					{
+						File = "walls_33.png"
+						Size = [3, 3]
+					}
+					{
+						File = "walls_66.png"
+						Size = [3, 3]
+					}
+				]
+			}
+			OperationalLighting
+			{
+				Layer = "lights_add"
+				DamageLevels
+				[
+					{
+						File = "lights.png"
+						Size = [3, 3]
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						Size = [3, 3]
+					}
+					{
+						File = "roof_33.png"
+						Size = [3, 3]
+					}
+					{
+						File = "roof_66.png"
+						Size = [3, 3]
+					}
+				]
+			}
+			OperationalRoofWindows
+			{
+				Layer = "roof_windows"
+				Offset = [0, .5]
+				DamageLevels
+				[
+					{
+						File = "roof_windows.png"
+						Size = [3, 2]
+					}
+					{
+						File = "roof_windows_33.png"
+						Size = [3, 2]
+					}
+					{
+						File = "roof_windows_66.png"
+						Size = [3, 2]
+					}
+				]
+			}
+			NonOperationalRoofWindows = &OperationalRoofWindows
+		}
+
+		BatterySprites
+		{
+			Type = AmmoSprites
+			Location = [.5, 1]
+			AmmoStorage = BatteryStorage
+			Layer = "doodads_low"
+			AmmoLevels
+			[
+				{
+					File = "batteries1.png"
+					Size = [1, 2]
+				}
+				{
+					File = "batteries2.png"
+					Size = [1, 2]
+				}
+			]
+		}
+
+		AmmoSprites
+		{
+			Type = AmmoSprites
+			Location = [1.5, 2]
+			AmmoStorage = firemissilestorage
+			Layer = "doodads_low"
+			AmmoLevels
+			[
+				{
+					File = "missile_a1.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_a2.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_a3.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_a4.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_b1.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_b2.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_b3.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_b4.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_c1.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_c2.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_c3.png"
+					Size = [3, 2]
+				}
+				{
+					File = "missile_c4.png"
+					Size = [3, 2]
+				}
+			]
+		}
+
+		OperationEffects
+		{
+			Type = OperationEffects
+			Location = [1, 1]
+			BecameOperationalMediaEffects = &/EFFECT_PREFABS/MachinesOn
+			BecameNonOperationalMediaEffects = &/EFFECT_PREFABS/MachinesOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/EFFECT_PREFABS/BigPartDestroyed
+			Location = [1, 1]
+
+			FactorHitEffectsWith = firemissilestorage
+			HitEffects
+			[
+				{
+					Type = PartAreaDamage
+					DamageVsOperationalPerTile = 3000
+					RadiusVsOperational = 6
+					DamageVsStructurePerTile = 1500
+					RadiusVsStructure = 4.5
+					Delay = .05
+					AllowFriendlyDamage = true
+				}
+				{
+					Type = AreaFires
+					FireChancePerTile = .3
+					FireRadius = 6
+					FireFalloff = 0
+					Delay = .05
+					AllowFriendlyFires = true
+				}
+			]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [1.5, 1.5]
+			Layer = "indicators"
+			Indicators
+			[
+				// Turned off.
+				{
+					Source = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+
+				// Out of power.
+				{
+					Source = BatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1.5, 1.5]
+					}
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,12 @@
+Ammo
+	{
+		ID = firemissile_part
+		MaxCarried = 1
+		MaxCarriedSprites = 1
+		CarriedSprite
+		{
+			File = "firemissile_part.png"
+			Size = [1, 1]
+		}
+		CarriedSpriteOffset = [0, .25]
+	}
